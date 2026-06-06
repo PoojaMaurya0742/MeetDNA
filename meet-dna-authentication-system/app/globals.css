@@ -1,0 +1,259 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-background: #060810;
+  --color-bg-secondary: #0a0e1a;
+  --color-foreground: #f0f4ff;
+  --color-muted: #5a6a88;
+
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-hover: rgba(255, 255, 255, 0.07);
+
+  --color-accent-green: #00ff88;
+  --color-accent-blue: #4a9eff;
+  --color-accent-red: #ff4466;
+  --color-accent-amber: #ffaa00;
+
+  --color-glow-green: rgba(0, 255, 136, 0.15);
+  --color-glow-blue: rgba(74, 158, 255, 0.15);
+}
+
+[data-theme='light'] {
+  --color-background: #f0f4f8;
+  --color-bg-secondary: #e8edf4;
+  --color-foreground: #0a1628;
+  --color-muted: #5a6a88;
+  --color-glass: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(10, 22, 40, 0.1);
+  --color-glass-hover: rgba(255, 255, 255, 0.9);
+  --color-glow-green: rgba(0, 200, 100, 0.12);
+  --color-glow-blue: rgba(74, 158, 255, 0.12);
+}
+
+[data-theme='light'] .glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(10, 22, 40, 0.1);
+  box-shadow: 0 8px 32px rgba(10, 22, 40, 0.08);
+}
+
+@layer base {
+  html {
+    @apply font-sans;
+    color-scheme: dark;
+  }
+  html[data-theme='light'] {
+    color-scheme: light;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+  ::selection {
+    background-color: rgba(0, 255, 136, 0.25);
+    color: #f0f4ff;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .glass-input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+}
+
+/* ---------- Animated background orbs ---------- */
+@keyframes orb-float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(8vw, 6vh) scale(1.15);
+  }
+  66% {
+    transform: translate(-5vw, 10vh) scale(0.9);
+  }
+}
+@keyframes orb-float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-7vw, -8vh) scale(0.95);
+  }
+  66% {
+    transform: translate(6vw, -4vh) scale(1.2);
+  }
+}
+.orb-a {
+  animation: orb-float-a 24s ease-in-out infinite;
+}
+.orb-b {
+  animation: orb-float-b 28s ease-in-out infinite;
+}
+
+/* ---------- DNA helix drift ---------- */
+@keyframes helix-drift {
+  0% {
+    transform: translateY(0) rotate(15deg);
+  }
+  100% {
+    transform: translateY(-60px) rotate(15deg);
+  }
+}
+.helix-drift {
+  animation: helix-drift 50s linear infinite alternate;
+}
+
+/* ---------- View / element entrance ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-view-in {
+  animation: view-in 0.35s ease both;
+}
+
+/* ---------- Error shake ---------- */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+.animate-shake {
+  animation: shake 0.4s ease;
+}
+
+/* ---------- DNA helix spinner ---------- */
+@keyframes helix-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.helix-spin {
+  animation: helix-spin 0.7s linear infinite;
+}
+
+/* ---------- Success check draw ---------- */
+@keyframes check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.check-draw {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: check-draw 0.6s ease forwards 0.2s;
+}
+@keyframes circle-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.circle-draw {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: circle-draw 0.7s ease forwards;
+}
+
+/* ---------- Range slider ---------- */
+input[type='range'].dna-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  outline: none;
+}
+input[type='range'].dna-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00ff88;
+  cursor: pointer;
+  border: 3px solid #060810;
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.4), 0 0 12px rgba(0, 255, 136, 0.5);
+}
+input[type='range'].dna-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00ff88;
+  cursor: pointer;
+  border: 3px solid #060810;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+}
+
+/* slim scrollbar */
+.slim-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+.fade-in-delay-1 { animation: fadeIn 0.4s 0.1s ease both; }
+.fade-in-delay-2 { animation: fadeIn 0.4s 0.2s ease both; }
+.fade-in-delay-3 { animation: fadeIn 0.4s 0.3s ease both; }
+.fade-in-delay-4 { animation: fadeIn 0.4s 0.4s ease both; }
