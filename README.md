@@ -179,11 +179,6 @@ https://www.reddit.com/r/LLMDevs/comments/1tyo1g0/how_we_built_meetdna_a_meeting
 
 ---
 
-## 🏆 Elevator Pitch
-
-**MeetDNA is an AI-powered meeting intelligence platform that converts conversations into long-term organizational memory through real-time transcription, intelligent insight extraction, RAG-based retrieval, and Hindsight-powered persistent memory.**
-
----
 
 ### Remember Every Decision. Recall Every Insight.
 
